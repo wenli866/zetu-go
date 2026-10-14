@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>择途 · 正在打开</title>
+<style>
+  :root { --bg: #f4f4f5; --card: #fff; --text: #141416; --sub: #6b6b70; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #0f0f11; --card: #1c1c1f; --text: #f4f4f5; --sub: #a1a1a8; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 16px; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  main { width: min(420px, 100%); padding: 32px 24px; border-radius: 20px; background: var(--card); text-align: center; }
+  h1 { margin: 0 0 4px; font-family: "Songti SC", "SimSun", serif; font-size: 34px; }
+  .tag { display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: 12px; color: #fff; background: linear-gradient(135deg, #4f46e5, #7c3aed, #db2777); vertical-align: middle; }
+  p { color: var(--sub); line-height: 1.6; font-size: 14px; }
+  .spin { width: 28px; height: 28px; margin: 18px auto; border-radius: 50%; border: 3px solid rgba(124, 58, 237, .2); border-top-color: #7c3aed; animation: s .8s linear infinite; }
+  @keyframes s { to { transform: rotate(360deg); } }
+  a.btn { display: block; margin-top: 16px; padding: 14px; border-radius: 14px; color: #fff; text-decoration: none; font-weight: 600;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed 60%, #db2777); }
+  .err { display: none; color: #c4000f; }
+  small { display: block; margin-top: 18px; color: var(--sub); font-size: 12px; word-break: break-all; }
+</style>
+</head>
+<body>
+<main>
+  <h1>择途 <span class="tag">公测</span></h1>
+  <p>帮大学生把有限的时间，投到最值得的地方</p>
+  <div class="spin" id="spin"></div>
+  <p id="msg">正在打开…第一次可能要等几秒</p>
+  <p class="err" id="err">服务器暂时连不上（可能在更新，一般 1 分钟内恢复）。请稍后点下面的按钮，或重新扫码。</p>
+  <a class="btn" id="go" href="__TARGET__/?invite=__INVITE__">进入择途</a>
+  <small>当前服务器地址更新于 __UPDATED__<br>二维码长期有效：服务器地址变了，这个页面会自动指向新地址。</small>
+</main>
+<script>
+  // 这个页面放在 GitHub Pages 上，地址固定，二维码印它。真正的服务器是临时网址，变了就由 scripts/go_link.sh 改这里。
+  var target = document.getElementById('go').href;
+  var done = false;
+  setTimeout(function () { if (!done) { document.getElementById('err').style.display = 'block'; document.getElementById('spin').style.display = 'none'; } }, 12000);
+  fetch('__TARGET__/sw.js', { mode: 'no-cors', cache: 'no-store' })
+    .then(function () { done = true; location.replace(target); })
+    .catch(function () { done = true; document.getElementById('err').style.display = 'block'; document.getElementById('spin').style.display = 'none'; document.getElementById('msg').style.display = 'none'; });
+</script>
+</body>
+</html>
