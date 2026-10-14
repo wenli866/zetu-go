@@ -172,10 +172,10 @@ canvas#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-
   <div class="top">
     <div class="kicker">择途 · 样稿（还没接进正式版）· 手机版</div>
     <div class="seg" role="tablist" aria-label="样稿分页">
-      <button role="tab" aria-selected="true" data-tab="ask">① 问几个问题</button>
-      <button role="tab" aria-selected="false" data-tab="plan">② 你的安排</button>
-      <button role="tab" aria-selected="false" data-tab="fresh">③ 新生起步</button>
-      <button role="tab" aria-selected="false" data-tab="guide">④ 首次引导</button>
+      <button role="tab" aria-selected="true" data-tab="ask">① 提问</button>
+      <button role="tab" aria-selected="false" data-tab="plan">② 安排</button>
+      <button role="tab" aria-selected="false" data-tab="fresh">③ 新生</button>
+      <button role="tab" aria-selected="false" data-tab="guide">④ 引导</button>
     </div>
   </div>
 
@@ -233,8 +233,8 @@ canvas#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-
             <div>
               <div class="row"><span class="ai-tag">✦ 为你定制</span><span class="muted">正大杯</span></div>
               <h3 style="margin-top:6px">全国大学生市场调查与分析大赛</h3>
-              <p class="why">你说想练数据分析：这个比赛从问卷设计、抽样、到 SPSS / Python 分析和写报告整套都要做，练完直接能写进简历。三人组队，正好和熟人一起。</p>
-              <div class="role"><span>本校 B1 类</span><span>团队 3 人</span><span>你填的：每周 6 小时</span></div>
+              <p class="why">你说想练数据分析：这个比赛从问卷设计、抽样、到 SPSS / Python 分析和写报告整套都要做，练完直接能写进简历。<span id="team-why">三人组队，正好和熟人一起。</span></p>
+              <div class="role"><span>本校 B1 类</span><span>团队 3 人</span><span id="hours-tag">你填的：每周 6 小时</span></div>
             </div>
           </div>
           <ol class="timeline" aria-label="时间安排">
@@ -412,6 +412,8 @@ canvas#confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-
       if (ans[1].length) why.push('每周 ' + ans[1][0]);
       if (ans[2].length) why.push('偏好「' + ans[2][0] + '」');
       if (ans[3].length) why.push('想练' + ans[3].slice(0, 2).join('、'));
+      if (ans[1].length) $('hours-tag').textContent = '你填的：每周 ' + ans[1][0];
+      if (ans[2].length) $('team-why').textContent = ans[2][0] === '一个人就能搞定的' ? '它是 3 人团队赛，你偏好一个人做：可以在班级群找两位分工明确的队友，你负责数据分析这一块。' : ans[2][0] === '想找学长学姐带' ? '3 人团队赛，可以请参加过的学长学姐当队长或指导。' : '3 人团队赛，正好和熟人一起。';
       if (why.length) $('plan-why').textContent = why.join('，') + '。按这些挑的，分数仍按学校文件。';
       show('plan');
       setTimeout(burst, 300);
