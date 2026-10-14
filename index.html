@@ -15,11 +15,8 @@
   h1 { margin: 0 0 4px; font-family: "Songti SC", "SimSun", serif; font-size: 34px; }
   .tag { display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: 12px; color: #fff; background: linear-gradient(135deg, #4f46e5, #7c3aed, #db2777); vertical-align: middle; }
   p { color: var(--sub); line-height: 1.6; font-size: 14px; }
-  .spin { width: 28px; height: 28px; margin: 18px auto; border-radius: 50%; border: 3px solid rgba(124, 58, 237, .2); border-top-color: #7c3aed; animation: s .8s linear infinite; }
-  @keyframes s { to { transform: rotate(360deg); } }
   a.btn { display: block; margin-top: 16px; padding: 14px; border-radius: 14px; color: #fff; text-decoration: none; font-weight: 600;
     background: linear-gradient(135deg, #4f46e5, #7c3aed 60%, #db2777); }
-  .err { display: none; color: #c4000f; }
   small { display: block; margin-top: 18px; color: var(--sub); font-size: 12px; word-break: break-all; }
 </style>
 </head>
@@ -27,20 +24,14 @@
 <main>
   <h1>择途 <span class="tag">公测</span></h1>
   <p>帮大学生把有限的时间，投到最值得的地方</p>
-  <div class="spin" id="spin"></div>
-  <p id="msg">正在打开…第一次可能要等几秒</p>
-  <p class="err" id="err">服务器暂时连不上（可能在更新，一般 1 分钟内恢复）。请稍后点下面的按钮，或重新扫码。</p>
+  <p id="msg">正在跳转到择途…<br>没有自动打开的话，点下面的按钮</p>
   <a class="btn" id="go" href="https://luxury-endorsed-nominations-riders.trycloudflare.com/?invite=ZETU-QM23">进入择途</a>
-  <small>当前服务器地址更新于 10-14 18:45<br>二维码长期有效：服务器地址变了，这个页面会自动指向新地址。</small>
+  <small>当前服务器地址更新于 10-14 18:58<br>二维码长期有效：服务器地址变了，这个页面会自动指向新地址。</small>
 </main>
 <script>
   // 这个页面放在 GitHub Pages 上，地址固定，二维码印它。真正的服务器是临时网址，变了就由 scripts/go_link.sh 改这里。
-  var target = document.getElementById('go').href;
-  var done = false;
-  setTimeout(function () { if (!done) { document.getElementById('err').style.display = 'block'; document.getElementById('spin').style.display = 'none'; } }, 12000);
-  fetch('https://luxury-endorsed-nominations-riders.trycloudflare.com/sw.js', { mode: 'no-cors', cache: 'no-store' })
-    .then(function () { done = true; location.replace(target); })
-    .catch(function () { done = true; document.getElementById('err').style.display = 'block'; document.getElementById('spin').style.display = 'none'; document.getElementById('msg').style.display = 'none'; });
+  // 2026-10-14 晚：原来先探测服务器再跳，部分手机（微信内置浏览器）探测一直没有结果 → 一直转圈。现在直接跳，不转圈。
+  setTimeout(function () { location.replace(document.getElementById('go').href); }, 200);
 </script>
 </body>
 </html>
