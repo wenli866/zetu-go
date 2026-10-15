@@ -25,8 +25,8 @@
   <h1>择途 <span class="tag">公测</span></h1>
   <p>帮大学生把有限的时间，投到最值得的地方</p>
   <p id="msg">正在跳转到择途…<br>没有自动打开的话，点下面的按钮</p>
-  <a class="btn" id="go" href="https://luxury-endorsed-nominations-riders.trycloudflare.com/?invite=ZETU-QM23">进入择途</a>
-  <small>当前服务器地址更新于 10-14 23:18<br>二维码长期有效：服务器地址变了，这个页面会自动指向新地址。</small>
+  <a class="btn" id="go" href="https://api.trycloudflare.com/?invite=ZETU-QM23">进入择途</a>
+  <small>当前服务器地址更新于 10-15 08:25<br>二维码长期有效：服务器地址变了，这个页面会自动指向新地址。</small>
 </main>
 <script>
   // 这个页面放在 GitHub Pages 上，地址固定，二维码印它。真正的服务器是临时网址，变了就由 scripts/go_link.sh 改这里。
@@ -34,7 +34,7 @@
   // 2026-10-14 深夜：后台看板也走这个固定地址 —— …/zetu-go/#admin=密钥 → 服务器的 /admin/密钥。
   // 密钥放在 # 后面，浏览器不会把它发给 GitHub，只在跳转时交给我们自己的服务器。
   var m = /^#admin=([A-Za-z0-9_-]{16,64})$/.exec(location.hash);
-  if (m) document.getElementById('go').href = 'https://luxury-endorsed-nominations-riders.trycloudflare.com/admin/' + m[1];
+  if (m) document.getElementById('go').href = 'https://api.trycloudflare.com/admin/' + m[1];
   setTimeout(function () { location.replace(document.getElementById('go').href); }, 200);
 </script>
 </body>
